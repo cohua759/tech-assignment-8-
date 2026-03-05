@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TA7 Thermal Dashboard</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <header>
+        <h1>Thermal Dashboard</h1>
+        <p>AMG8833 Live Sensor Feed</p>
+    </header>
+
+    <main>
+
+        <section>
+            <h2>Live Feed</h2>
+            <div id="live-container">
+                <div class="canvas-wrapper">
+                    <canvas id="live-canvas" width="256" height="256"></canvas>
+                    <p class="canvas-label">Thermal Heatmap</p>
+                </div>
+                <div id="live-stats">
+                    <div class="stat-card">
+                        <h3>Thermistor</h3>
+                        <p id="thermistor-temp">--°C</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Prediction</h3>
+                        <p id="prediction-label">--</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Confidence</h3>
+                        <p id="confidence-val">--%</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>WebSocket</h3>
+                        <p id="ws-status">Disconnected</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>ESP32 Controls</h2>
+            <div id="controls">
+                <button id="btn-get-one">Get One</button>
+                <button id="btn-start">Start Continuous</button>
+                <button id="btn-stop" class="btn-danger">Stop</button>
+            </div>
+            <p id="command-status"></p>
+        </section>
+
+        <section>
+            <h2>Registered Devices</h2>
+            <table id="devices-table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>MAC Address</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </section>
+
+        <section>
+            <h2>Readings History</h2>
+            <div id="table-controls">
+                <input id="mac-filter" type="text" placeholder="Filter by MAC address...">
+                <button id="btn-filter">Filter</button>
+                <button id="btn-clear-filter">Clear</button>
+            </div>
+            <table id="readings-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>MAC Address</th>
+                        <th>Thermistor</th>
+                        <th>Prediction</th>
+                        <th>Confidence</th>
+                        <th>Heatmap</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </section>
+
+    </main>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>

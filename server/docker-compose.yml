@@ -1,0 +1,29 @@
+services:
+  db:
+    image: postgres:15
+    ports:
+      - "5432:5432"    # ← add this line
+    environment:
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: postgres
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+      - ./webserver/init.sql:/docker-entrypoint-initdb.d/init.sql
+
+  webserver:
+    build: ./webserver
+    ports:
+      - "8000:8000"
+    environment:
+      DB_HOST: db
+      DB_NAME: ${DB_NAME}
+      DB_PASSWORD: ${DB_PASSWORD}
+      MQTT_BROKER: ${MQTT_BROKER}
+      MQTT_TOPIC: ${MQTT_TOPIC}
+      PYTHONUNBUFFERED: 1
+    depends_on:
+      - db
+
+volumes:
+  pg_data:
