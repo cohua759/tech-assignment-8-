@@ -19,10 +19,11 @@ MQTT_PORT   = 1883
 MQTT_TOPIC  = os.getenv("MQTT_TOPIC")
 
 
+DB_HOST     = os.getenv("DB_HOST", "localhost")   
+DB_USER     = os.getenv("DB_USER", "root")         
 DB_NAME     = os.getenv("DB_NAME")
 DB_PASSWORD = os.getenv("DB_PASSWORD")
-DB_HOST     = "db"
-DB_USER     = "ta7user"   # was "root"
+
 
 
 
@@ -72,6 +73,7 @@ async def db_get_readings(device_mac: str = None) -> list:
     for r in rows:
         d = dict(r)
         d["pixels"] = json.loads(d["pixels"]) if isinstance(d["pixels"], str) else d["pixels"]
+        d.pop("timestamp", None)    # remove non-serializable datetime
         result.append(d)
     return result
 
@@ -91,7 +93,7 @@ async def db_get_devices() -> list:
         await cur.execute("SELECT * FROM devices ORDER BY id")
         rows = await cur.fetchall()
     db.close()
-    return [dict(r) for r in rows]
+    return [{"id": r["id"], "mac_address": r["mac_address"]} for r in rows]
 
 
 _loop: asyncio.AbstractEventLoop = None
