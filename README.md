@@ -1,6 +1,6 @@
 # **SUBMISSION LINK MUST BE EXACTLY ONE LINE BELOW THIS** (FAILURE TO DO SO WILL RESULT IN A 0 GRADE)
 
-REPLACE THIS LINE WITH VIDEO LINK
+https://youtube.com/shorts/PIAq4edsTbs?feature=share
 
 ## Video submission requirements:
  - Must clearly show the ESP 32 and Sensor working
