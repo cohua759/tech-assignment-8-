@@ -1,15 +1,15 @@
 CREATE TABLE IF NOT EXISTS devices (
-    id          SERIAL PRIMARY KEY,
-    mac_address VARCHAR(17) NOT NULL UNIQUE
+    id          INT AUTO_INCREMENT PRIMARY KEY,
+    mac_address VARCHAR(17) UNIQUE NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS readings (
-    id              SERIAL PRIMARY KEY,
+    id              INT AUTO_INCREMENT PRIMARY KEY,
     mac_address     VARCHAR(17) NOT NULL,
-    thermistor_temp FLOAT NOT NULL,
-    prediction      VARCHAR(10) NOT NULL,
-    confidence      FLOAT NOT NULL,
-    pixels          JSONB NOT NULL,
+    pixels          JSON NOT NULL,
+    thermistor_temp DOUBLE,
+    prediction      VARCHAR(10),
+    confidence      DOUBLE,
     timestamp       TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (mac_address) REFERENCES devices(mac_address)
 );
