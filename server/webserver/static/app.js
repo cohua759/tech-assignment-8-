@@ -163,3 +163,9 @@ document.addEventListener('DOMContentLoaded', () => {
         fetchReadings();
     });
 });
+
+async function logout() {
+    await fetch('/api/logout', { method: 'POST' });
+    window.location.href = '/login';
+}
+

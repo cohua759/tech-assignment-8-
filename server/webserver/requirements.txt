@@ -3,3 +3,4 @@ uvicorn[standard]
 aiomysql
 paho-mqtt
 python-dotenv
+bcrypt

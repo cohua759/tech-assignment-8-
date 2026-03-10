@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <header><h1>Thermal Dashboard</h1></header>
+    <main>
+        <section>
+            <h2>Login</h2>
+            <form id="login-form">
+                <input type="text" id="username" placeholder="Username" required>
+                <input type="password" id="password" placeholder="Password" required>
+                <button type="submit">Login</button>
+            </form>
+            <p id="error-msg" style="color:red;"></p>
+            <p>No account? <a href="/register">Register here</a></p>
+        </section>
+    </main>
+    <script>
+        document.getElementById('login-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const res = await fetch('/api/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    username: document.getElementById('username').value,
+                    password: document.getElementById('password').value
+                })
+            });
+            if (res.ok) {
+                window.location.href = '/';
+            } else {
+                document.getElementById('error-msg').textContent = 'Invalid username or password';
+            }
+        });
+    </script>
+</body>
+</html>
