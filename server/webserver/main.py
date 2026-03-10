@@ -351,6 +351,13 @@ async def delete_reading(reading_id: int, user=Depends(get_current_user)):
 async def get_devices(user=Depends(get_current_user)):
     return await db_get_devices()
 
+#placeholder if im not too lazy to go get a client id (or busy)
+@app.get("/api/oauth/login")
+async def oauth_login():
+    return RedirectResponse("https://phylax.ece140.site/authorize")
+
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)
+
+
